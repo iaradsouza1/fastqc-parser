@@ -1,9 +1,7 @@
 import pandas as pd
-import os
-import re
 
 opt_dict = {
-    "basic_staistics":              ">>Basic Statistics",
+    "basic_statistics":             ">>Basic Statistics",
     "per_base_quality":             ">>Per base sequence quality",
     "per_sequence_quality_scores":  ">>Per sequence quality scores",
     "per_base_sequence_content":    ">>Per base sequence content",
@@ -23,7 +21,7 @@ def get_table_summaries(opt, file):
 
     with open(file, "r") as fn:
         for i, line in enumerate(fn):
-            if line.startswith(opt):
+            if line.startswith(opt_dict[opt]):
                 count_line[0] = i+1
                 inside = True
             elif line.startswith(">>END_MODULE") and inside:
@@ -40,8 +38,4 @@ def get_table_summaries(opt, file):
 
     df = pd.DataFrame(res_list)
     df.columns = colnames
-
-    return df
-
-print(get_table_summaries(">>Basic Statistics",
-      "/home/iaradsouza/skygenic_tests/fastqc_integration/subsample_115_1_fastqc/fastqc_data.txt"))
+    return df.to_csv(index=False, header=True, sep=";")
