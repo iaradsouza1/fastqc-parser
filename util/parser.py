@@ -38,4 +38,4 @@ def get_table_summaries(opt, file):
 
     df = pd.DataFrame(res_list)
     df.columns = colnames
-    return df.to_csv(index=False, header=True, sep=";")
+    return df.to_csv(path_or_buf=None,index=False, header=True, sep=";")
