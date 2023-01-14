@@ -14,12 +14,12 @@ opt_dict = {
 }
 
 def get_table_summaries(opt, file):
-
+    
     count_line = [0, 0]
     inside = False
     res_list = []
 
-    with open(file, "r") as fn:
+    with open(str(file), "r") as fn:
         for i, line in enumerate(fn):
             if line.startswith(opt_dict[opt]):
                 count_line[0] = i+1
@@ -28,7 +28,7 @@ def get_table_summaries(opt, file):
                 count_line[1] = i-1
                 break
 
-    with open(file, "r") as fn:
+    with open(str(file), "r") as fn:
         for i, line in enumerate(fn):
             if i >= count_line[0] and i <= count_line[1]:
                 if line.startswith("#"):
